@@ -32,6 +32,11 @@ add_action( 'wp_enqueue_scripts', 'howler_enqueue_assets' );
  * @since 1.0.0
  */
 function howler_add_floating_button() {
+	// Only load the button if the user is logged in and has the capability to manage options.
+	if ( ! is_user_logged_in() || ! current_user_can( 'manage_options' ) ) {
+		return;
+	}
+
 	$options = get_option( 'howler_settings' );
 	$trello_email = isset( $options['trello_email'] ) ? $options['trello_email'] : '';
 
