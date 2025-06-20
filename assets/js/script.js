@@ -39,26 +39,52 @@ document.addEventListener("DOMContentLoaded", function () {
         });
       }
 
+      let currentColor = "#000";
+
+      document.querySelectorAll(".howler-pencil-button").forEach((button) => {
+        button.addEventListener("click", () => {
+          currentColor = button.dataset.color;
+          document
+            .querySelectorAll(".howler-pencil-button")
+            .forEach((btn) => btn.classList.remove("is-active"));
+          button.classList.add("is-active");
+        });
+      });
+
       let drawing = false;
 
       canvas.addEventListener("mousedown", (e) => {
         drawing = true;
+        const rect = canvas.getBoundingClientRect();
+        const scaleX = canvas.width / rect.width;
+        const scaleY = canvas.height / rect.height;
+
+        context.strokeStyle = currentColor;
+        context.lineWidth = 20;
+        context.lineCap = "round";
         context.beginPath();
-        context.moveTo(e.offsetX, e.offsetY);
+        context.moveTo(
+          (e.clientX - rect.left) * scaleX,
+          (e.clientY - rect.top) * scaleY
+        );
       });
 
       canvas.addEventListener("mousemove", (e) => {
         if (!drawing) return;
-        context.lineTo(e.offsetX, e.offsetY);
+        const rect = canvas.getBoundingClientRect();
+        const scaleX = canvas.width / rect.width;
+        const scaleY = canvas.height / rect.height;
+        context.lineTo(
+          (e.clientX - rect.left) * scaleX,
+          (e.clientY - rect.top) * scaleY
+        );
         context.stroke();
       });
 
-      canvas.addEventListener("mouseup", () => {
-        drawing = false;
-      });
-
-      canvas.addEventListener("mouseleave", () => {
-        drawing = false;
+      ["mouseup", "mouseleave"].forEach((event) => {
+        canvas.addEventListener(event, () => {
+          drawing = false;
+        });
       });
     });
   }
@@ -78,7 +104,14 @@ document.addEventListener("DOMContentLoaded", function () {
       const howlerSpinner = document.getElementById("howler-spinner");
       const screenshot = canvas ? canvas.toDataURL("image/png") : "";
 
-      if (!feedback || !feedbackTitle) return;
+      if (!feedback || !feedbackTitle) {
+        alert(
+          __("Please fill in both the title and feedback fields.", "howler")
+        );
+        submitButton.disabled = false;
+        submitButton.textContent = __("Send to Trello", "howler");
+        return;
+      }
 
       howlerSpinner.hidden = false;
 

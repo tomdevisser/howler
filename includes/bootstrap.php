@@ -54,6 +54,20 @@ function howler_add_floating_button() {
 			<input type="text" name="feedback-title" id="feedback-title" placeholder="<?php esc_attr_e( 'Feedback Title', 'howler' ); ?>" />
 			<textarea name="feedback" id="feedback" placeholder="<?php esc_attr_e( 'Describe what you would like differently...', 'howler' ); ?>" ></textarea>
 
+			<div id="howler-pencil-switcher" class="pencil-switcher">
+				<button class="howler-pencil-button black is-active" data-color="#000">
+					<span class="screen-reader-label">
+						<?php esc_html_e( 'Black', 'howler' ); ?>
+					</span>
+				</button>
+
+				<button class="howler-pencil-button red" data-color="#ff0000">
+					<span class="screen-reader-label">
+						<?php esc_html_e( 'Red', 'howler' ); ?>
+					</span>
+				</button>
+			</div>
+
 			<canvas id="howler-canvas" class="howler-canvas" contenteditable="true" width="400" height="300">
 				<?php esc_html_e( 'Your browser does not support the canvas element.', 'howler' ); ?>
 			</canvas>
