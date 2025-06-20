@@ -36,13 +36,18 @@ function howler_render_tools_page() {
 
 	$deleted_screenshots = false;
 
-	if ( isset( $_POST['howler_delete_screenshots_nonce'] ) && wp_verify_nonce( $_POST['howler_delete_screenshots_nonce'], 'howler_delete_screenshots' ) ) {
+	if ( isset( $_POST['howler_delete_screenshots_nonce'] ) && wp_verify_nonce( sanitize_textarea_field( wp_unslash( $_POST['howler_delete_screenshots_nonce'] ) ), 'howler_delete_screenshots' ) ) {
 		$screenshots = get_posts(
 			array(
 				'post_type'      => 'attachment',
 				'post_status'    => 'inherit',
 				'posts_per_page' => -1,
-				'meta_key'       => '_howler_feedback_screenshot',
+				'meta_query' => array(
+					array(
+						'key'     => '_howler_feedback_screenshot',
+						'compare' => 'EXISTS',
+					),
+				),
 			)
 		);
 

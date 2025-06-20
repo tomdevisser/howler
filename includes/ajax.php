@@ -13,13 +13,13 @@ defined( 'ABSPATH' ) or die;
  *
  * @since 1.0.0
  */
-function howler_handle_feedback_ajax() {
+function howler_handle_feedback_ajax() {	
 	$options = get_option( 'howler_settings' );
 	$trello_email = isset( $options['trello_email'] ) ? $options['trello_email'] : '';
 	$custom_email = isset( $options['custom_email'] ) ? $options['custom_email'] : '';
-	$feedback = sanitize_textarea_field( $_POST['feedback'] ?? '' );
-	$feedback_title = sanitize_text_field( $_POST['feedback_title'] ?? '' );
-	$screenshot_data = $_POST['screenshot'] ?? '';
+	$feedback = isset( $_POST['feedback'] ) ? sanitize_textarea_field( wp_unslash( $_POST['feedback'] ) ) : '';
+	$feedback_title = isset( $_POST['feedback_title'] ) ? sanitize_text_field( wp_unslash( $_POST['feedback_title'] ) ) : '';
+	$screenshot_data = isset( $_POST['screenshot'] ) ? sanitize_text_field( wp_unslash( $_POST['screenshot'] ) ) : '';
 
 	if ( ! $feedback || ! $feedback_title || ( ! is_email( $trello_email ) && ! is_email( $custom_email ) ) ) {
 		wp_send_json_error( 'Sorry, we couldn\'t send your feedback. We might need some ourselves.' );

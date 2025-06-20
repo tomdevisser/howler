@@ -168,7 +168,7 @@ function howler_render_settings_page() {
 	<div class="wrap">
 		<h1><?php esc_html_e( 'Howler', 'howler' ); ?></h1>
 		<p>
-			<?php esc_html_e( 'Welcome to Howler! This plugin lets you send visual feedback to Trello — just enter your board\'s email address below. Got suggestions or ideas? I\'d love to hear them via the plugin reviews.', 'howler' ); ?>
+			<?php esc_html_e( 'Welcome to Howler! This plugin lets you collect visual feedback from your website and send it to Trello, email, or other destinations. Just enter your preferred address below. Got suggestions or ideas? I\'d love to hear them via the plugin reviews.', 'howler' ); ?>
 		</p>
 		<form method="post" action="options.php">
 			<?php

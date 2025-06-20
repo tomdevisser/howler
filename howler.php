@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Howler
- * Description: Let clients take screenshots, annotate visually, and send them to your Trello board — without leaving the site.
+ * Description: Let clients take screenshots, annotate visually, and send feedback straight to Trello, email, or another destination — without leaving the site.
  * Version: 1.0.0
  * Author: Tom de Visser
  * Author URI: https://tomdevisser.dev/
