@@ -34,6 +34,6 @@ define( 'HOWLER_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'HOWLER_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
 /**
- * Load plugin settings.
+ * Bootstrap the plugin.
  */
-require_once HOWLER_PLUGIN_DIR . 'includes/settings.php';
+require_once HOWLER_PLUGIN_DIR . 'includes/bootstrap.php';
