@@ -1,4 +1,4 @@
-=== Howler ===
+=== Site Feedback ===
 Contributors: tomdevisser
 Tags: feedback, trello, screenshots, annotations, frontend feedback
 Requires at least: 6.8
@@ -12,7 +12,7 @@ Let clients take screenshots, annotate visually, and send feedback straight to T
 
 == Description ==
 
-Howler makes it easy for clients, editors, or testers to leave actionable feedback directly on your website. With a single click, users can capture a screenshot, draw or annotate it, and send it straight to your Trello board or any email address you configure.
+Site Feedback makes it easy for clients, editors, or testers to leave actionable feedback directly on your website. With a single click, users can capture a screenshot, draw or annotate it, and send it straight to your Trello board or any email address you configure.
 
 It’s perfect for collecting visual feedback during web development, QA testing, or content review.
 
@@ -28,15 +28,15 @@ It’s perfect for collecting visual feedback during web development, QA testing
 
 == Installation ==
 
-1. Upload the plugin files to the `/wp-content/plugins/howler/` directory, or install it through the WordPress plugins screen.
+1. Upload the plugin files to the `/wp-content/plugins/site-feedback/` directory, or install it through the WordPress plugins screen.
 2. Activate the plugin through the ‘Plugins’ screen in WordPress.
-3. Go to Settings → Howler to configure your Trello or custom email address.
-4. Optionally go to Tools → Howler Cleanup to bulk-delete feedback screenshots.
+3. Go to Settings → Site Feedback to configure your Trello or custom email address.
+4. Optionally go to Tools → Site Feedback Cleanup to bulk-delete feedback screenshots.
 
 == Frequently Asked Questions ==
 
 = Can I use this without Trello? =
-Yes! You can configure Howler to send feedback to any email address.
+Yes! You can configure Site Feedback to send feedback to any email address.
 
 = Will screenshots show up in the Media Library? =
 By default, yes. You can hide them via the plugin settings.
@@ -58,4 +58,4 @@ Yes, feedback can be submitted by anyone unless restricted by custom logic.
 == Upgrade Notice ==
 
 = 1.0.0 =
-First release. Set your Trello or email settings under Settings → Howler.
+First release. Set your Trello or email settings under Settings → Site Feedback.

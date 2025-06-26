@@ -1,8 +1,8 @@
 <?php
 /**
- * All AJAX functionality for the Howler plugin.
+ * All AJAX functionality for the Site Feedback plugin.
  * 
- * @package Howler
+ * @package Site Feedback
  * @since   1.0.0
  */
 
@@ -13,8 +13,8 @@ defined( 'ABSPATH' ) or die;
  *
  * @since 1.0.0
  */
-function howler_handle_feedback_ajax() {	
-	$options = get_option( 'howler_settings' );
+function site_feedback_handle_feedback_ajax() {	
+	$options = get_option( 'site_feedback_settings' );
 	$trello_email = isset( $options['trello_email'] ) ? $options['trello_email'] : '';
 	$custom_email = isset( $options['custom_email'] ) ? $options['custom_email'] : '';
 	$feedback = isset( $_POST['feedback'] ) ? sanitize_textarea_field( wp_unslash( $_POST['feedback'] ) ) : '';
@@ -36,7 +36,7 @@ function howler_handle_feedback_ajax() {
 
 		// Generate a unique filename.
 		$upload_dir = wp_upload_dir();
-		$filename = 'howler-screenshot-' . time() . '.png';
+		$filename = 'site-feedbackscreenshot-' . time() . '.png';
 		$filepath = $upload_dir['path'] . '/' . $filename;
 
 		// Save the image to the file system.
@@ -57,7 +57,7 @@ function howler_handle_feedback_ajax() {
 			require_once ABSPATH . 'wp-admin/includes/image.php';
 			$attachment_data = wp_generate_attachment_metadata( $attachment_id, $filepath );
 			wp_update_attachment_metadata( $attachment_id, $attachment_data );
-			add_post_meta( $attachment_id, '_howler_feedback_screenshot', true );
+			add_post_meta( $attachment_id, '_site_feedback_feedback_screenshot', true );
 
 			$image_url = wp_get_attachment_url( $attachment_id );
 			$message .= '<p><strong>Screenshot:</strong><br><img src="' . esc_url( $image_url ) . '" style="max-width:100%; height:auto;" /></p>';
@@ -80,5 +80,5 @@ function howler_handle_feedback_ajax() {
 
 	wp_send_json_success();
 }
-add_action( 'wp_ajax_howler_send_feedback', 'howler_handle_feedback_ajax' );
-add_action( 'wp_ajax_nopriv_howler_send_feedback', 'howler_handle_feedback_ajax' );
+add_action( 'wp_ajax_site_feedback_send_feedback', 'site_feedback_handle_feedback_ajax' );
+add_action( 'wp_ajax_nopriv_site_feedback_send_feedback', 'site_feedback_handle_feedback_ajax' );

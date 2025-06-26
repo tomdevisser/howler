@@ -1,8 +1,8 @@
 <?php
 /**
- * Settings for Howler plugin.
+ * Settings for Site Feedback plugin.
  *
- * @package Howler
+ * @package Site Feedback
  * @since   1.0.0
  */
 
@@ -16,83 +16,83 @@ defined( 'ABSPATH' ) or die;
  * @param array $links Existing plugin action links.
  * @return array Modified plugin action links.
  */
-function howler_plugin_action_links( $links ) {
-	$settings_link = '<a href="' . esc_url( admin_url( 'options-general.php?page=howler-settings' ) ) . '">' . esc_html__( 'Settings', 'howler' ) . '</a>';
+function site_feedback_plugin_action_links( $links ) {
+	$settings_link = '<a href="' . esc_url( admin_url( 'options-general.php?page=site_feedback_settings' ) ) . '">' . esc_html__( 'Settings', 'site-feedback' ) . '</a>';
 	array_push( $links, $settings_link );
 	return $links;
 }
-add_filter( 'plugin_action_links_howler/howler.php', 'howler_plugin_action_links' );
+add_filter( 'plugin_action_links_site-feedback/site-feedback.php', 'site_feedback_plugin_action_links' );
 
 /**
- * Add howler settings page under the Settings menu.
+ * Add site-feedback settings page under the Settings menu.
  *
  * @since 1.0.0
  */
-function howler_add_settings_page() {
+function site_feedback_add_settings_page() {
 	add_options_page(
-		__( 'Howler Settings', 'howler' ),
-		__( 'Howler', 'howler' ),
+		__( 'Site Feedback Settings', 'site-feedback' ),
+		__( 'Site Feedback', 'site-feedback' ),
 		'manage_options',
-		'howler-settings',
-		'howler_render_settings_page'
+		'site_feedback_settings',
+		'site_feedback_render_settings_page'
 	);
 }
-add_action( 'admin_menu', 'howler_add_settings_page' );
+add_action( 'admin_menu', 'site_feedback_add_settings_page' );
 
 /**
- * Register Howler settings, sections, and fields.
+ * Register Site Feedback settings, sections, and fields.
  *
  * @since 1.0.0
  */
-function howler_register_settings() {
+function site_feedback_register_settings() {
 	register_setting(
-		'howler_settings_group',
-		'howler_settings',
-		'howler_sanitize_settings'
+		'site_feedback_settings_group',
+		'site_feedback_settings',
+		'site_feedback_sanitize_settings'
 	);
 
 	add_settings_section(
-		'howler_common_section',
-		__( 'Common Settings', 'howler' ),
+		'site_feedback_common_section',
+		__( 'Common Settings', 'site-feedback' ),
 		'__return_false',
-		'howler-settings'
+		'site_feedback_settings'
 	);
 
 	add_settings_field(
-		'howler_custom_email',
-		__( 'Custom Email Address', 'howler' ),
-		'howler_custom_email_field_cb',
-		'howler-settings',
-		'howler_common_section'
+		'site_feedback_custom_email',
+		__( 'Custom Email Address', 'site-feedback' ),
+		'site_feedback_custom_email_field_cb',
+		'site_feedback_settings',
+		'site_feedback_common_section'
 	);
 
 	add_settings_field(
-		'howler_trello_email',
-		__( 'Trello Email-to-board', 'howler' ),
-		'howler_trello_email_field_cb',
-		'howler-settings',
-		'howler_common_section'
+		'site_feedback_trello_email',
+		__( 'Trello Email-to-board', 'site-feedback' ),
+		'site_feedback_trello_email_field_cb',
+		'site_feedback_settings',
+		'site_feedback_common_section'
 	);
 
 	add_settings_field(
-		'howler_hide_in_media_library',
-		__( 'Hide screenshots in the media library', 'howler' ),
-		'howler_hide_in_media_library_cb',
-		'howler-settings',
-		'howler_common_section'
+		'site_feedback_hide_in_media_library',
+		__( 'Hide screenshots in the media library', 'site-feedback' ),
+		'site_feedback_hide_in_media_library_cb',
+		'site_feedback_settings',
+		'site_feedback_common_section'
 	);
 }
-add_action( 'admin_init', 'howler_register_settings' );
+add_action( 'admin_init', 'site_feedback_register_settings' );
 
 /**
- * Sanitize howler settings.
+ * Sanitize site-feedback settings.
  *
  * @since 1.0.0
  *
  * @param array $input Raw input.
  * @return array Sanitized input.
  */
-function howler_sanitize_settings( $input ) {
+function site_feedback_sanitize_settings( $input ) {
 	$output = array();
 
 	/**
@@ -126,16 +126,16 @@ function howler_sanitize_settings( $input ) {
  *
  * @since 1.0.0
  */
-function howler_trello_email_field_cb() {
-	$options = get_option( 'howler_settings', array() );
+function site_feedback_trello_email_field_cb() {
+	$options = get_option( 'site_feedback_settings', array() );
 	$value   = isset( $options['trello_email'] ) ? $options['trello_email'] : '';
 
 	printf(
-		'<input type="email" name="howler_settings[trello_email]" value="%s" class="regular-text">',
+		'<input type="email" name="site_feedback_settings[trello_email]" value="%s" class="regular-text">',
 		esc_attr( $value )
 	);
 
-	echo '<p class="description">' . esc_html__( 'Paste the unique email address for your Trello board here. You can find it in Trello by opening your board, clicking the three-dot menu in the top right, then choosing “More” → “Email-to-board Settings”. Trello will generate a special email address that lets you create new cards by sending an email.', 'howler' ) . '</p>';
+	echo '<p class="description">' . esc_html__( 'Paste the unique email address for your Trello board here. You can find it in Trello by opening your board, clicking the three-dot menu in the top right, then choosing “More” → “Email-to-board Settings”. Trello will generate a special email address that lets you create new cards by sending an email.', 'site-feedback' ) . '</p>';
 }
 
 /**
@@ -143,16 +143,16 @@ function howler_trello_email_field_cb() {
  *
  * @since 1.0.0
  */
-function howler_custom_email_field_cb() {
-	$options = get_option( 'howler_settings', array() );
+function site_feedback_custom_email_field_cb() {
+	$options = get_option( 'site_feedback_settings', array() );
 	$value   = isset( $options['custom_email'] ) ? $options['custom_email'] : '';
 
 	printf(
-		'<input type="email" name="howler_settings[custom_email]" value="%s" class="regular-text">',
+		'<input type="email" name="site_feedback_settings[custom_email]" value="%s" class="regular-text">',
 		esc_attr( $value )
 	);
 
-	echo '<p class="description">' . esc_html__( 'This lets you receive feedback directly via email.', 'howler' ) . '</p>';
+	echo '<p class="description">' . esc_html__( 'This lets you receive feedback directly via email.', 'site-feedback' ) . '</p>';
 }
 
 /**
@@ -160,20 +160,20 @@ function howler_custom_email_field_cb() {
  *
  * @since 1.0.0
  */
-function howler_render_settings_page() {
+function site_feedback_render_settings_page() {
 	if ( ! current_user_can( 'manage_options' ) ) {
 		return;
 	}
 	?>
 	<div class="wrap">
-		<h1><?php esc_html_e( 'Howler', 'howler' ); ?></h1>
+		<h1><?php esc_html_e( 'Site Feedback', 'site-feedback' ); ?></h1>
 		<p>
-			<?php esc_html_e( 'Welcome to Howler! This plugin lets you collect visual feedback from your website and send it to Trello, email, or other destinations. Just enter your preferred address below. Got suggestions or ideas? I\'d love to hear them via the plugin reviews.', 'howler' ); ?>
+			<?php esc_html_e( 'Welcome to Site Feedback! This plugin lets you collect visual feedback from your website and send it to Trello, email, or other destinations. Just enter your preferred address below. Got suggestions or ideas? I\'d love to hear them via the plugin reviews.', 'site-feedback' ); ?>
 		</p>
 		<form method="post" action="options.php">
 			<?php
-			settings_fields( 'howler_settings_group' );
-			do_settings_sections( 'howler-settings' );
+			settings_fields( 'site_feedback_settings_group' );
+			do_settings_sections( 'site_feedback_settings' );
 			submit_button();
 			?>
 		</form>
@@ -186,13 +186,13 @@ function howler_render_settings_page() {
  *
  * @since 1.0.0
  */
-function howler_hide_in_media_library_cb() {
-	$options = get_option( 'howler_settings', array() );
+function site_feedback_hide_in_media_library_cb() {
+	$options = get_option( 'site_feedback_settings', array() );
 	$checked = isset( $options['hide_in_media_library'] ) ? (bool) $options['hide_in_media_library'] : false;
 
 	printf(
-		'<label><input type="checkbox" name="howler_settings[hide_in_media_library]" value="1" %s> %s</label>',
+		'<label><input type="checkbox" name="site_feedback_settings[hide_in_media_library]" value="1" %s> %s</label>',
 		checked( $checked, true, false ),
-		esc_html__( 'Prevent screenshots from appearing in the Media Library.', 'howler' )
+		esc_html__( 'Prevent screenshots from appearing in the Media Library.', 'site-feedback' )
 	);
 }

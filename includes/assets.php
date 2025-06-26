@@ -1,29 +1,29 @@
 <?php
 /**
- * Assets for the Howler plugin.
+ * Assets for the Site Feedback plugin.
  * 
- * @package Howler
+ * @package Site Feedback
  * @since   1.0.0
  */
 
 defined( 'ABSPATH' ) or die;
 
 /**
- * Register Howler's frontend assets.
+ * Register Site Feedback's frontend assets.
  *
  * @since 1.0.0
  */
-function howler_enqueue_assets() {
-	wp_enqueue_style( 'howler-style', HOWLER_PLUGIN_URL . 'assets/css/style.css', array(), HOWLER_VERSION );
-	wp_enqueue_script( 'html2canvas-script', HOWLER_PLUGIN_URL . 'assets/js/html2canvas.js', array(), HOWLER_VERSION, true );
-	wp_enqueue_script( 'howler-script', HOWLER_PLUGIN_URL . 'assets/js/script.js', array( 'wp-i18n', 'html2canvas-script' ), HOWLER_VERSION, true );
+function site_feedback_enqueue_assets() {
+	wp_enqueue_style( 'site-feedback-style', EASY_FEEDBACK_PLUGIN_URL . 'assets/css/style.css', array(), EASY_FEEDBACK_VERSION );
+	wp_enqueue_script( 'html2canvas-script', EASY_FEEDBACK_PLUGIN_URL . 'assets/js/html2canvas.js', array(), EASY_FEEDBACK_VERSION, true );
+	wp_enqueue_script( 'site-feedback-script', EASY_FEEDBACK_PLUGIN_URL . 'assets/js/script.js', array( 'wp-i18n', 'html2canvas-script' ), EASY_FEEDBACK_VERSION, true );
 	wp_localize_script(
-		'howler-script',
-		'howler',
+		'site-feedback-script',
+		'siteFeedback',
 		array(
-			'howler_ajax_url'       => admin_url( 'admin-ajax.php' ),
-			'howler_feedback_nonce' => wp_create_nonce( 'howler_feedback_nonce' ),
+			'site_feedback_ajax_url'       => admin_url( 'admin-ajax.php' ),
+			'site_feedback_feedback_nonce' => wp_create_nonce( 'site_feedback_feedback_nonce' ),
 		)
 	);
 }
-add_action( 'wp_enqueue_scripts', 'howler_enqueue_assets' );
+add_action( 'wp_enqueue_scripts', 'site_feedback_enqueue_assets' );

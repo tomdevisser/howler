@@ -1,16 +1,18 @@
 document.addEventListener("DOMContentLoaded", function () {
   const { __ } = wp.i18n;
-  const feedbackButton = document.getElementById("howler-feedback-button");
-  const feedbackPopup = document.getElementById("howler-feedback-popup");
+  const feedbackButton = document.getElementById(
+    "site-feedback-feedback-button"
+  );
+  const feedbackPopup = document.getElementById("site-feedback-feedback-popup");
   const feedbackNotification = document.getElementById(
-    "howler-feedback-notification"
+    "site-feedback-feedback-notification"
   );
 
   if (feedbackButton && feedbackPopup) {
     feedbackButton.addEventListener("click", () => {
       feedbackPopup.hidden = !feedbackPopup.hidden;
 
-      const canvas = document.getElementById("howler-canvas");
+      const canvas = document.getElementById("site-feedback-canvas");
       const context = canvas?.getContext("2d");
 
       if (canvas && context && feedbackPopup.hidden === false) {
@@ -18,8 +20,8 @@ document.addEventListener("DOMContentLoaded", function () {
           ignoreElements: (el) => {
             return (
               el.id === "wpadminbar" ||
-              el.id === "howler-feedback-popup" ||
-              el.id === "howler-feedback-button"
+              el.id === "site-feedback-feedback-popup" ||
+              el.id === "site-feedback-feedback-button"
             );
           },
           y: window.scrollY,
@@ -41,15 +43,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
       let currentColor = "#000";
 
-      document.querySelectorAll(".howler-pencil-button").forEach((button) => {
-        button.addEventListener("click", () => {
-          currentColor = button.dataset.color;
-          document
-            .querySelectorAll(".howler-pencil-button")
-            .forEach((btn) => btn.classList.remove("is-active"));
-          button.classList.add("is-active");
+      document
+        .querySelectorAll(".site-feedback-pencil-button")
+        .forEach((button) => {
+          button.addEventListener("click", () => {
+            currentColor = button.dataset.color;
+            document
+              .querySelectorAll(".site-feedback-pencil-button")
+              .forEach((btn) => btn.classList.remove("is-active"));
+            button.classList.add("is-active");
+          });
         });
-      });
 
       let drawing = false;
 
@@ -89,39 +93,46 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  const submitButton = document.getElementById("howler-feedback-submit-button");
+  const submitButton = document.getElementById(
+    "site-feedback-feedback-submit-button"
+  );
   const feedbackTitleField = document.getElementById("feedback-title");
   const feedbackField = document.getElementById("feedback");
 
   if (submitButton && feedbackField) {
     submitButton.addEventListener("click", function () {
       submitButton.disabled = true;
-      submitButton.textContent = __("Sending...", "howler");
+      submitButton.textContent = __("Sending...", "site-feedback");
 
       const feedbackTitle = feedbackTitleField.value;
       const feedback = feedbackField.value;
-      const canvas = document.getElementById("howler-canvas");
-      const howlerSpinner = document.getElementById("howler-spinner");
+      const canvas = document.getElementById("site-feedback-canvas");
+      const siteFeedbackSpinner = document.getElementById(
+        "site-feedback-spinner"
+      );
       const screenshot = canvas ? canvas.toDataURL("image/png") : "";
 
       if (!feedback || !feedbackTitle) {
         alert(
-          __("Please fill in both the title and feedback fields.", "howler")
+          __(
+            "Please fill in both the title and feedback fields.",
+            "site-feedback"
+          )
         );
         submitButton.disabled = false;
-        submitButton.textContent = __("Send to Trello", "howler");
+        submitButton.textContent = __("Send to Trello", "site-feedback");
         return;
       }
 
-      howlerSpinner.hidden = false;
+      siteFeedbackSpinner.hidden = false;
 
-      fetch(howler.howler_ajax_url, {
+      fetch(siteFeedback.site_feedback_ajax_url, {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
         },
         body: new URLSearchParams({
-          action: "howler_send_feedback",
+          action: "site_feedback_send_feedback",
           feedback,
           feedback_title: feedbackTitle,
           screenshot,
@@ -129,14 +140,14 @@ document.addEventListener("DOMContentLoaded", function () {
       })
         .then(() => {
           submitButton.disabled = false;
-          submitButton.textContent = __("'Send to Trello'", "howler");
-          howlerSpinner.remove();
+          submitButton.textContent = __("'Send to Trello'", "site-feedback");
+          siteFeedbackSpinner.remove();
           feedbackPopup.hidden = true;
 
           if (feedbackNotification) {
             feedbackNotification.textContent = __(
               "Thank you for your feedback!",
-              "howler"
+              "site-feedback"
             );
             feedbackNotification.style.opacity = 1;
 
@@ -150,8 +161,8 @@ document.addEventListener("DOMContentLoaded", function () {
           }
         })
         .catch(() => {
-          howlerSpinner.remove();
-          alert(__("Failed to send feedback.", "howler"));
+          siteFeedbackSpinner.remove();
+          alert(__("Failed to send feedback.", "site-feedback"));
         });
     });
   }

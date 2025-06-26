@@ -1,4 +1,4 @@
-.howler-button {
+.site-feedback-button {
   background-color: #243363;
   border: none;
   border-radius: 8px;
@@ -17,7 +17,7 @@
   }
 }
 
-.howler-floating-button {
+.site-feedback-floating-button {
   bottom: 2rem;
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   opacity: 0.8;
@@ -31,7 +31,7 @@
   }
 }
 
-.howler-feedback-notification {
+.site-feedback-feedback-notification {
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
@@ -47,7 +47,7 @@
   z-index: 1000;
 }
 
-.howler-feedback-popup {
+.site-feedback-feedback-popup {
   .feedback-popup-inner {
     background-color: white;
     border-radius: 8px;
@@ -77,7 +77,7 @@
     }
   }
 
-  .howler-footer {
+  .site-feedback-footer {
     align-items: center;
     display: flex;
     gap: 1rem;
@@ -93,13 +93,13 @@ input {
   padding: 0.5rem;
 }
 
-.howler-pencil-switcher {
+.site-feedback-pencil-switcher {
   align-items: center;
   display: flex;
   gap: 0.5rem;
 }
 
-.howler-pencil-button {
+.site-feedback-pencil-button {
   border: 2px solid transparent;
   border-radius: 4px;
   height: 1rem;

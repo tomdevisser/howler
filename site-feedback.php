@@ -1,7 +1,7 @@
 <?php
 /**
- * Plugin Name: Howler
- * Description: Let clients take screenshots, annotate visually, and send feedback straight to Trello, email, or another destination — without leaving the site.
+ * Plugin Name: Site Feedback
+ * Description: Let clients take screenshots, annotate visually, and send feedback to Trello, email, or more — all without leaving your site.
  * Version: 1.0.0
  * Author: Tom de Visser
  * Author URI: https://tomdevisser.dev/
@@ -10,7 +10,7 @@
  * Requires PHP: 8.0
  * License: GNU General Public License v2.0 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain: howler
+ * Text Domain: site-feedback
  */
 
 /**
@@ -21,19 +21,19 @@ defined( 'ABSPATH' ) or die;
 /**
  * Plugin version, used for cache-busting assets.
  */
-define( 'HOWLER_VERSION', '1.0.0' );
+define( 'EASY_FEEDBACK_VERSION', '1.0.0' );
 
 /**
  * Absolute path to the plugin directory.
  */
-define( 'HOWLER_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+define( 'EASY_FEEDBACK_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 
 /**
  * URL to the plugin directory.
  */
-define( 'HOWLER_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+define( 'EASY_FEEDBACK_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
 /**
  * Bootstrap the plugin.
  */
-require_once HOWLER_PLUGIN_DIR . 'includes/bootstrap.php';
+require_once EASY_FEEDBACK_PLUGIN_DIR . 'includes/bootstrap.php';

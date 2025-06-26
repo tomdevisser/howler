@@ -1,8 +1,8 @@
 <?php
 /**
- * Functionality for handling media attachments in the Howler plugin.
+ * Functionality for handling media attachments in the Site Feedback plugin.
  * 
- * @package Howler
+ * @package Site Feedback
  * @since   1.0.0
  */
 
@@ -14,9 +14,9 @@ defined( 'ABSPATH' ) or die;
  * @param array $args The query arguments for attachments.
  * @return array Modified query arguments.
  */
-function howler_hide_feedback_screenshots( $args ) {
+function site_feedback_hide_feedback_screenshots( $args ) {
 	// Only modify the query if the 'hide_in_media_library' setting is enabled.
-	$options = get_option( 'howler_settings' );
+	$options = get_option( 'site_feedback_settings' );
 	if ( ! isset( $options['hide_in_media_library'] ) || ! $options['hide_in_media_library'] ) {
 		return $args;
 	}
@@ -24,11 +24,11 @@ function howler_hide_feedback_screenshots( $args ) {
 	$args['meta_query'][] = array(
 		'relation' => 'OR',
 		array(
-			'key'     => '_howler_feedback_screenshot',
+			'key'     => '_site_feedback_feedback_screenshot',
 			'compare' => 'NOT EXISTS', // Show if meta doesn't exist
 		),
 		array(
-			'key'     => '_howler_feedback_screenshot',
+			'key'     => '_site_feedback_feedback_screenshot',
 			'value'   => true,
 			'compare' => '!=', // Hide if meta is exactly 'true'
 		),
@@ -36,4 +36,4 @@ function howler_hide_feedback_screenshots( $args ) {
 
 	return $args;
 }
-add_filter( 'ajax_query_attachments_args', 'howler_hide_feedback_screenshots' );
+add_filter( 'ajax_query_attachments_args', 'site_feedback_hide_feedback_screenshots' );
